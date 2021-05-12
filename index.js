@@ -120,6 +120,48 @@ app.post('/api/updBookPublisher', (req, res) => {
     .catch((e) => res.status(200).json(e));
 });
 
+app.get('/api/books', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: null })
+    .then((rez) => res.status(200).json({ books: rez }))
+    .catch((e) => res.status(200).json(e));
+});
+app.post('/api/addBook', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.title, req.body.authId, req.body.pubId] })
+    .then((rez) => res.status(200).json({ created: rez }))
+    .catch((e) => res.status(200).json(e));
+});
+app.post('/api/delBook', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.bookId })
+    .then((rez) => res.status(200).json({ deleted: rez }))
+    .catch((e) => res.status(200).json(e));
+});
+app.post('/api/updBook', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.title, req.body.authId, req.body.pubId, req.body.bookId] })
+    .then((rez) => res.status(200).json({ updated: rez }))
+    .catch((e) => res.status(200).json(e));
+});
+
+app.get('/api/cards', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: null })
+    .then((rez) => res.status(200).json({ cards: rez }))
+    .catch((e) => res.status(200).json(e));
+});
+app.post('/api/addCard', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.bookId, req.body.userId] })
+    .then((rez) => res.status(200).json({ created: rez }))
+    .catch((e) => res.status(200).json(e));
+});
+app.post('/api/delCard', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.cardId })
+    .then((rez) => res.status(200).json({ deleted: rez }))
+    .catch((e) => res.status(200).json(e));
+});
+app.post('/api/updCard', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.bookId, req.body.userId, req.body.returned, req.body.cardId] })
+    .then((rez) => res.status(200).json({ updated: rez }))
+    .catch((e) => res.status(200).json(e));
+});
+
 app.listen(4488);
 
 function getQuery(url) {
