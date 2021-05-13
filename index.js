@@ -15,40 +15,49 @@ app.get('/api/dbinfo', (req, res) => {
 
 app.get('/api/students', (req, res) => {
   DbQuery.dbUse({ query: getQuery(req.url), data: null })
-    .then((rez) => res.status(200).json({ students: rez }))
+    .then((rez) => res.status(200).json({ list: rez }))
     .catch((e) => res.status(200).json(e));
 });
 app.post('/api/addStudent', (req, res) => {
   DbQuery.dbUse({ query: getQuery(req.url), data: req.body.name })
-    .then((rez) => res.status(200).json({ students: rez }))
+    .then((rez) => res.status(200).json({ student: rez }))
     .catch((e) => res.status(200).json(e));
 });
-
-app.post('/api/delUser', (req, res) => {
-  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.name })
+app.post('/api/delStudent', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.id })
     .then((rez) => res.status(200).json({ deleted: rez }))
     .catch((e) => res.status(200).json(e));
 });
-app.post('/api/updUser', (req, res) => {
-  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.name, req.body.oldName] })
+app.post('/api/updStudent', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.name, req.body.id] })
     .then((rez) => res.status(200).json({ updated: rez }))
     .catch((e) => res.status(200).json(e));
 });
 
 app.get('/api/professors', (req, res) => {
   DbQuery.dbUse({ query: getQuery(req.url), data: null })
-    .then((rez) => res.status(200).json({ professors: rez }))
+    .then((rez) => res.status(200).json({ list: rez }))
     .catch((e) => res.status(200).json(e));
 });
 app.post('/api/addProfessor', (req, res) => {
   DbQuery.dbUse({ query: getQuery(req.url), data: req.body.name })
-    .then((rez) => res.status(200).json({ Professor: rez }))
+    .then((rez) => res.status(200).json({ professor: rez }))
+    .catch((e) => res.status(200).json(e));
+});
+app.post('/api/delProfessor', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.id })
+    .then((rez) => res.status(200).json({ deleted: rez }))
+    .catch((e) => res.status(200).json(e));
+});
+app.post('/api/updProfessor', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.name, req.body.id] })
+    .then((rez) => res.status(200).json({ updated: rez }))
     .catch((e) => res.status(200).json(e));
 });
 
 app.get('/api/workers', (req, res) => {
   DbQuery.dbUse({ query: getQuery(req.url), data: null })
-    .then((rez) => res.status(200).json({ Workers: rez }))
+    .then((rez) => res.status(200).json({ list: rez }))
     .catch((e) => res.status(200).json(e));
 });
 app.post('/api/addWorker', (req, res) => {
@@ -56,31 +65,20 @@ app.post('/api/addWorker', (req, res) => {
     .then((rez) => res.status(200).json({ Worker: rez }))
     .catch((e) => res.status(200).json(e));
 });
-
-app.get('/api/bookAuthors', (req, res) => {
-  DbQuery.dbUse({ query: getQuery(req.url), data: null })
-    .then((rez) => res.status(200).json({ bookAuthors: rez }))
-    .catch((e) => res.status(200).json(e));
-});
-app.post('/api/addBookAuthor', (req, res) => {
-  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.name })
-    .then((rez) => res.status(200).json({ created: rez }))
-    .catch((e) => res.status(200).json(e));
-});
-app.post('/api/delBookAuthor', (req, res) => {
-  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.name })
+app.post('/api/delWorker', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.id })
     .then((rez) => res.status(200).json({ deleted: rez }))
     .catch((e) => res.status(200).json(e));
 });
-app.post('/api/updBookAuthor', (req, res) => {
-  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.name, req.body.oldName] })
+app.post('/api/updWorker', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.name, req.body.id] })
     .then((rez) => res.status(200).json({ updated: rez }))
     .catch((e) => res.status(200).json(e));
 });
 
 app.get('/api/bookAuthors', (req, res) => {
   DbQuery.dbUse({ query: getQuery(req.url), data: null })
-    .then((rez) => res.status(200).json({ bookAuthors: rez }))
+    .then((rez) => res.status(200).json({ list: rez }))
     .catch((e) => res.status(200).json(e));
 });
 app.post('/api/addBookAuthor', (req, res) => {
@@ -89,19 +87,19 @@ app.post('/api/addBookAuthor', (req, res) => {
     .catch((e) => res.status(200).json(e));
 });
 app.post('/api/delBookAuthor', (req, res) => {
-  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.name })
+  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.id })
     .then((rez) => res.status(200).json({ deleted: rez }))
     .catch((e) => res.status(200).json(e));
 });
 app.post('/api/updBookAuthor', (req, res) => {
-  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.name, req.body.oldName] })
+  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.name, req.body.id] })
     .then((rez) => res.status(200).json({ updated: rez }))
     .catch((e) => res.status(200).json(e));
 });
 
 app.get('/api/bookPublishers', (req, res) => {
   DbQuery.dbUse({ query: getQuery(req.url), data: null })
-    .then((rez) => res.status(200).json({ bookPublishers: rez }))
+    .then((rez) => res.status(200).json({ list: rez }))
     .catch((e) => res.status(200).json(e));
 });
 app.post('/api/addBookPublisher', (req, res) => {
@@ -110,19 +108,19 @@ app.post('/api/addBookPublisher', (req, res) => {
     .catch((e) => res.status(200).json(e));
 });
 app.post('/api/delBookPublisher', (req, res) => {
-  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.name })
+  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.id })
     .then((rez) => res.status(200).json({ deleted: rez }))
     .catch((e) => res.status(200).json(e));
 });
 app.post('/api/updBookPublisher', (req, res) => {
-  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.name, req.body.oldName] })
+  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.name, req.body.id] })
     .then((rez) => res.status(200).json({ updated: rez }))
     .catch((e) => res.status(200).json(e));
 });
 
 app.get('/api/books', (req, res) => {
   DbQuery.dbUse({ query: getQuery(req.url), data: null })
-    .then((rez) => res.status(200).json({ books: rez }))
+    .then((rez) => res.status(200).json({ list: rez }))
     .catch((e) => res.status(200).json(e));
 });
 app.post('/api/addBook', (req, res) => {
@@ -131,33 +129,54 @@ app.post('/api/addBook', (req, res) => {
     .catch((e) => res.status(200).json(e));
 });
 app.post('/api/delBook', (req, res) => {
-  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.bookId })
+  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.id })
     .then((rez) => res.status(200).json({ deleted: rez }))
     .catch((e) => res.status(200).json(e));
 });
 app.post('/api/updBook', (req, res) => {
-  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.title, req.body.authId, req.body.pubId, req.body.bookId] })
+  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.title, req.body.authId, req.body.pubId, req.body.id] })
     .then((rez) => res.status(200).json({ updated: rez }))
     .catch((e) => res.status(200).json(e));
 });
 
-app.get('/api/cards', (req, res) => {
+app.get('/api/studentCards', (req, res) => {
   DbQuery.dbUse({ query: getQuery(req.url), data: null })
-    .then((rez) => res.status(200).json({ cards: rez }))
+    .then((rez) => res.status(200).json({ list: rez }))
     .catch((e) => res.status(200).json(e));
 });
-app.post('/api/addCard', (req, res) => {
+app.post('/api/addStudentCard', (req, res) => {
   DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.bookId, req.body.userId] })
     .then((rez) => res.status(200).json({ created: rez }))
     .catch((e) => res.status(200).json(e));
 });
-app.post('/api/delCard', (req, res) => {
-  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.cardId })
+app.post('/api/delStudentCard', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.id })
     .then((rez) => res.status(200).json({ deleted: rez }))
     .catch((e) => res.status(200).json(e));
 });
-app.post('/api/updCard', (req, res) => {
-  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.bookId, req.body.userId, req.body.returned, req.body.cardId] })
+app.post('/api/updStudentCard', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.bookId, req.body.userId, req.body.returned, req.body.id] })
+    .then((rez) => res.status(200).json({ updated: rez }))
+    .catch((e) => res.status(200).json(e));
+});
+
+app.get('/api/professorCards', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: null })
+    .then((rez) => res.status(200).json({ list: rez }))
+    .catch((e) => res.status(200).json(e));
+});
+app.post('/api/addProfessorCard', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.bookId, req.body.userId] })
+    .then((rez) => res.status(200).json({ created: rez }))
+    .catch((e) => res.status(200).json(e));
+});
+app.post('/api/delProfessorCard', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: req.body.id })
+    .then((rez) => res.status(200).json({ deleted: rez }))
+    .catch((e) => res.status(200).json(e));
+});
+app.post('/api/updProfessorCard', (req, res) => {
+  DbQuery.dbUse({ query: getQuery(req.url), data: [req.body.bookId, req.body.userId, req.body.returned, req.body.id] })
     .then((rez) => res.status(200).json({ updated: rez }))
     .catch((e) => res.status(200).json(e));
 });
